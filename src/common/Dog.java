@@ -1,10 +1,13 @@
 package common;
 
+import java.util.Objects;
+
 /**
  *
  * @author Instlogin
  */
-public class Dog {
+public class Dog implements Comparable<Dog> {
+
     private String name;
     private int age;
     private String rabiesId;
@@ -13,6 +16,36 @@ public class Dog {
         this.name = name;
         this.age = age;
         this.rabiesId = rabiesId;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.rabiesId);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Dog other = (Dog) obj;
+        if (!Objects.equals(this.rabiesId, other.rabiesId)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int compareTo(Dog target) {
+        return this.getRabiesId().compareTo(target.getRabiesId());
     }
 
     public String getName() {
@@ -44,5 +77,4 @@ public class Dog {
         return "Dog{" + "name=" + name + ", age=" + age + ", rabiesId=" + rabiesId + '}';
     }
 
-    
 }

@@ -1,6 +1,7 @@
 package common;
 
-import org.apache.commons.lang3.builder.CompareToBuilder;
+import java.util.Objects;
+
 
 /**
  * For practice, add the required equals, hashCode and toString methods. Then
@@ -9,12 +10,55 @@ import org.apache.commons.lang3.builder.CompareToBuilder;
  * field can be used for sorting. What will you do?
  * 
  */
-public class Movie  {
+public class Movie implements Comparable<Movie> {
     private String title;
     private String director;
 
-    public Movie() {
+    public Movie(String title, String director) {
+        this.title = title;
+        this.director = director;
     }
+
+    @Override
+    public String toString() {
+        return "Movie{" + "title=" + title + ", director=" + director + '}';
+    }
+    
+    
+    
+    @Override
+    public int compareTo(Movie target) {
+        return this.getTitle().compareTo(target.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.title);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Movie other = (Movie) obj;
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+
+    
     
     public String getTitle() {
         return title;
@@ -31,6 +75,8 @@ public class Movie  {
     public void setDirector(String director) {
         this.director = director;
     }
+
+    
     
 
 }
